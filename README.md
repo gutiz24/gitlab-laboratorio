@@ -70,8 +70,8 @@ deploy:
     - docker run --name "springapp" -d -p 8082:8080 $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
 ```
 Resultado Final:
-<p aling="center">
-<img src="./img/image5.png" style="width:15%; height:auto;">
+<p align="center">
+<img src="./img/image5.png" style="width:50%; height:auto;">
 </p>
 
 ```diff
@@ -81,22 +81,22 @@ Resultado Final:
 1. Para dar de alta un nuevo usuario y cierto rol. Se debe acceder a la consola como usuario `root`
 2. Una vez accedido se debe ir a la parte de  `admin > userss` donde podremos crear un nuevo usuario con en la parte de `New User`
 3. Se deben de rellenar los datos necesario y se debe dar a `Create New User`
-<p aling="center">
+<p align="center">
 <img src="./img/image1.png" style="width:20%; height:auto;">
 </p>
 
 4. Una vez creado se vuelve a editar el usario nuevo como root y se le crea una contraseña
-<p aling="center">
+<p align="center">
 <img src="./img/image2.png" style="width:20%; height:auto;">
 </p>
 
 5. Para poder pobar el nivel de permisos de debe de acceder al repo `ejercicios-gitlab`. Se debe invitar a un nuevo usuario con la cuenta original `developer1`. Para ello situado en el repo se debe acceder a `manage > Members > Invite Members`
-<p aling="center">
+<p align="center">
 <img src="./img/image3.png" style="width:20%; height:auto;">
 </p>
 
 6. Una vez hecho se da la posibilidad de seleccionar el tipo de rol que tendrá el nuevo usuario invitado.
-<p aling="center">
+<p align="center">
 <img src="./img/image4.png" style="width:20%; height:auto;">
 </p>
 
@@ -164,19 +164,19 @@ Resultado Final:
 Al hacer el git clone con otro repositorio externo, por defecto no deja hacerlo con la variable especial `${CI_JOB_TOKEN}` aunque se sea miembro del repositorio clonando, Para ello hace falta una configurción adicional `CI/CD > Job Token Permissions` donde se da los permisos de autorización a grupos o poryectos externos.
 
 * **Configuración por defecto y resultado de git clone**
-<p aling="center">
-<img src="./img/image7.png" style="width:15%; height:auto;">
+<p align="center">
+<img src="./img/image7.png" style="width:50%; height:auto;">
 </p>
-<p aling="center">
-<img src="./img/image8.png" style="width:15%; height:auto;">
+<p align="center">
+<img src="./img/image8.png" style="width:50%; height:auto;">
 </p>
 
 * **Configuración añadiendo autorizción externa y resultado de git clone**
-<p aling="center">
-<img src="./img/image6.png" style="width:15%; height:auto;">
+<p align="center">
+<img src="./img/image6.png" style="width:50%; height:auto;">
 </p>
-<p aling="center">
-<img src="./img/image9.png" style="width:15%; height:auto;">
+<p align="center">
+<img src="./img/image9.png" style="width:50%; height:auto;">
 </p>
 
 Cabe resaltar que los permisos del `CI_JOB_TOKEN` son los mismo que del usuario que los ejecuta y por tanto se aplican los scopes que tenga ese usuario en la instacia de gitlab.
@@ -201,25 +201,25 @@ Para el uso de deploys keys en el pipelines CI/CD se debe generar y configurar p
 ssh-keygen -t rsa -b 2048 -C "springapp-key"
 ```
 2. En la parte de `Deploy keys` se selecciona la opción `Add new key` y se le pega la llave pública generado del paso previo `.pub`
-<p aling="center">
-<img src="./img/image10.png" style="width:15%; height:auto;">
+<p align="center">
+<img src="./img/image10.png" style="width:50%; height:auto;">
 </p>
 
 3. En el otro repositorio externo que se quiere clonar usando el deploy key. Se debe añadir la llave privada en una variable como forma de archivo (File)
-<p aling="center">
-<img src="./img/image11.png" style="width:15%; height:auto;">
+<p align="center">
+<img src="./img/image11.png" style="width:50%; height:auto;">
 </p>
 
 4. Luego para hacer que SSH confíe en el host (gitlab.local). Se debe configurar el archivo `know_hosts` para ello se puede crear una nueva variable de tipo archivo `SSH_KNOW_HOSTS` que como valor tendrá el resultado del comando `ssh-keyscan gitlab.local`
 
-<p aling="center">
-<img src="./img/image12.png" style="width:15%; height:auto;">
+<p align="center">
+<img src="./img/image12.png" style="width:50%; height:auto;">
 </p>
 
 5. El resultado de la operación es que se puede hacer correctamente el clonado del repositorio.
 
-<p aling="center">
-<img src="./img/image13.png" style="width:15%; height:auto;">
+<p align="center">
+<img src="./img/image13.png" style="width:50%; height:auto;">
 </p>
 
 6. Cabe resaltar que aunque no se sea miembro del repositorioa a clonar. Se puede efectuar la opreación porque los deploy-keys están definidos para una interacción máquina-máquina que manejarán los permisos de lectura o escritura definidos.
