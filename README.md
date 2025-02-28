@@ -15,7 +15,7 @@ stages:
 
 ```
 
-3. En el job de `maven-build` se trata de compilar el cídog del proyecto que da como resultado un artefacto `tarject/<nombre-artefacto>.jar` como ejecutable. Este se guardará para los siguientes stages con la opción `artifacs`.
+3. En el job de `maven-build` se trata de compilar el código del proyecto que da como resultado un artefacto `tarject/<nombre-artefacto>.jar` como ejecutable. Este se guardará para los siguientes stages con la opción `artifacs`.
 ```yaml
 maven-build:
   image: maven:3.9-eclipse-temurin-21
@@ -82,22 +82,22 @@ Resultado Final:
 2. Una vez accedido se debe ir a la parte de  `admin > userss` donde podremos crear un nuevo usuario con en la parte de `New User`
 3. Se deben de rellenar los datos necesario y se debe dar a `Create New User`
 <p align="center">
-<img src="./img/image1.png" style="width:20%; height:auto;">
+<img src="./img/image1.png" style="width:50%; height:auto;">
 </p>
 
 4. Una vez creado se vuelve a editar el usario nuevo como root y se le crea una contraseña
 <p align="center">
-<img src="./img/image2.png" style="width:20%; height:auto;">
+<img src="./img/image2.png" style="width:50%; height:auto;">
 </p>
 
 5. Para poder pobar el nivel de permisos de debe de acceder al repo `ejercicios-gitlab`. Se debe invitar a un nuevo usuario con la cuenta original `developer1`. Para ello situado en el repo se debe acceder a `manage > Members > Invite Members`
 <p align="center">
-<img src="./img/image3.png" style="width:20%; height:auto;">
+<img src="./img/image3.png" style="width:50%; height:auto;">
 </p>
 
 6. Una vez hecho se da la posibilidad de seleccionar el tipo de rol que tendrá el nuevo usuario invitado.
 <p align="center">
-<img src="./img/image4.png" style="width:20%; height:auto;">
+<img src="./img/image4.png" style="width:50%; height:auto;">
 </p>
 
 6. Tabla de diferencias
@@ -222,7 +222,7 @@ ssh-keygen -t rsa -b 2048 -C "springapp-key"
 <img src="./img/image13.png" style="width:50%; height:auto;">
 </p>
 
-6. Cabe resaltar que aunque no se sea miembro del repositorioa a clonar. Se puede efectuar la opreación porque los deploy-keys están definidos para una interacción máquina-máquina que manejarán los permisos de lectura o escritura definidos.
+6. Cabe resaltar que aunque no se sea miembro del repositorioa a clonar. Se puede efectuar la operación porque los deploy-keys están definidos para una interacción máquina-máquina que manejarán los permisos de lectura o escritura definidos.
 
 * **Código Pipeline**
 ```yaml
@@ -244,51 +244,3 @@ clone-repo:
     script:
         - git clone git@gitlab.local:bootcamp/ejercicios-gitlab.git
 ```
-
-### 1. CI/CD de una aplicación spring - OBLIGATORIO
-
-* Crea un nuevo proyecto en GitLab y un repositorio en el mismo, para la aplicación `springapp`. El código fuente de la misma lo puedes encontrar en este [enlace](../02-gitlab/springapp).
-* Sube el código al repositorio recientemente creado en GitLab.
-* Crea una pipeline con los siguientes stages:
-  * `maven:build` - En este `stage` el código de la aplicación se compila con [maven](https://maven.apache.org/).
-  * `maven:test` - En este `stage` ejecutamos los tests utilizando [maven](https://maven.apache.org/).
-  * `docker:build` - En este `stage` generamos una nueva imagen de Docker a partir del Dockerfile suministrado en el raíz del proyecto.
-  * `deploy` - En este `stage` utilizamos la imagen anteriormente creada, y la hacemos correr en nuestro local.
-
-* **Pistas**:
-  * Utiliza la versión de maven 3.6.3
-  * El comando para realizar una `build` con maven: `mvn clean package`
-  * El comando para realizar los tests con maven: `mvn verify`
-  * Cuando despleguemos la aplicación en local, podemos comprobar su ejecución en: `http://localhost:8080`
-
-En resumen, la `pipeline` de `CI/CD`, debe hacer la build de la aplicación generando los ficheros jar, hacer los tests de maven y finalmente dockerizar la app (el dockerfile ya se proporciona en el repo) y hacer un deploy en local.
-
-### 2. Crear un usuario nuevo y probar que no puede acceder al proyecto anteriormente creado - OBLIGATORIO
-
-* Añadirlo con el role `guest`, comprobar que acciones puede hacer.
-* Cambiar a role `reporter`, comprobar que acciones puede hacer.
-* Cambiar a role `developer`, comprobar que acciones puede hacer.
-* Cambiar a role `maintainer`, comprobar que acciones puede hacer.
-
-Acciones a probar:
-
-* Commit
-* Ejecutar pipeline manualmente
-* Push and pull del repo
-* Merge request
-* Acceder a la administración del repo
-
-### 3. Crear un nuevo repositorio, que contenga una pipeline, que clone otro proyecto, springapp anteriormente creado - OPCIONAL
-
-Relizar de las siguientes maneras:
-  
-* **Con el método de CI job token**
-  * ¿Qué ocurre si el repo que estoy clonando no estoy cómo miembro?
-
-> Pista: https://docs.gitlab.com/ee/ci/jobs/ci_job_token.html
-
-* **Con el método deploy keys**
-  * Crear deploy key en el repo springapp y poner solo lectura
-  * Crear pipeline que use la deploy key para clonar el repo
-
- > Pista: https://docs.gitlab.com/ee/ci/ssh_keys/
